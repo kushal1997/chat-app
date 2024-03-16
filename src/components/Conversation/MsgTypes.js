@@ -3,12 +3,53 @@ import {
   Divider,
   IconButton,
   Link,
+  Menu,
+  MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
 import React from "react";
 import { styled, alpha, useTheme } from "@mui/material/styles";
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
+import { Message_options } from "../../data";
+
+export const MessageOptions = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <>
+      <DotsThreeVertical
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+        size={20}
+      />
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <Stack spacing={1} px={1}>
+          {Message_options.map((el) => (
+            <MenuItem onClick={handleClick}>{el.title}</MenuItem>
+          ))}
+        </Stack>
+      </Menu>
+    </>
+  );
+};
 
 export const TextMsg = ({ el }) => {
   const theme = useTheme();
@@ -31,6 +72,9 @@ export const TextMsg = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
+
+      {/* jshfjs */}
+      <MessageOptions />
     </Stack>
   );
 };
@@ -75,6 +119,7 @@ export const MediaMsg = ({ el }) => {
           <Typography variant="body2">{el.message}</Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 };
@@ -116,6 +161,7 @@ export const ReplyMsg = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 };
@@ -169,6 +215,7 @@ export const LinkMsg = ({ el }) => {
           </Stack>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 };
@@ -206,12 +253,13 @@ export const DocMsg = ({ el }) => {
           </Stack>
           <Typography
             variant="body2"
-            sx={{ color: el.incoming? theme.palette.text : "#fff" }}
+            sx={{ color: el.incoming ? theme.palette.text : "#fff" }}
           >
             {el.message}
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 };
