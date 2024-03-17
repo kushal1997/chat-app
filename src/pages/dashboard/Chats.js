@@ -17,7 +17,7 @@ import React from "react";
 import { ChatList } from "../../data";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import {  styled,alpha,useTheme } from "@mui/material/styles";
-
+import { Scrollbars } from 'react-custom-scrollbars';
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
         backgroundColor: "#44b700",
@@ -161,7 +161,7 @@ export const Chats = () => {
                 </Stack>
 
                 <Stack direction={"column"} sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}>
-                    <SimpleBarStyle timeout={500} clickOnTrack={false}>
+                 
 
 
                         <Stack spacing={2.4}>
@@ -187,7 +187,7 @@ export const Chats = () => {
                             }
 
                         </Stack>
-                    </SimpleBarStyle>
+                
                 </Stack>
             </Stack>
         </Box>

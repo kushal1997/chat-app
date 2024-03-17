@@ -21,6 +21,8 @@ import {
     VideoCamera,
   } from "phosphor-react";
 import { styled, alpha, useTheme } from "@mui/material/styles";
+import { ToggleSidebar } from '../../redux/slices/app';
+import { useDispatch } from 'react-redux';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
@@ -52,6 +54,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }));
 export const Header = () => {
     const theme = useTheme();
+    const dispatch=useDispatch();
   return (
     <Box
     p={2}
@@ -68,7 +71,9 @@ export const Header = () => {
       sx={{ width: "100%", height: "100%" }}
       spacing={4}
     >
-      <Stack direction={"row"} spacing={2}>
+      <Stack direction={"row"} spacing={2} onClick={()=>{
+        dispatch(ToggleSidebar());
+      }}>
         <Box>
           <StyledBadge
             overlap="circular"
